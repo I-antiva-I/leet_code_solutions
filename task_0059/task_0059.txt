@@ -1,0 +1,50 @@
+# LeetCode #0059 | Spiral Matrix II | [MEDIUM]
+
+class Solution(object):
+    def generateMatrix(self, n):
+        """
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        count = 0
+        row_dir = 0
+        col_dir = 1
+        r = 0
+        c = 0
+        coils = 0
+        matrix = [[0] * n for _ in range(n)]
+    
+        while (count < n*n):
+            matrix[r][c] = count+1
+            count += 1
+            r += row_dir
+            c += col_dir
+
+            if ((r == n - coils and row_dir == 1) or
+                (c == n - coils and col_dir == 1) or
+                (r == -1 + coils and row_dir == -1) or
+                (c == -1 + coils and col_dir == -1) ):
+
+                    if col_dir == 1:
+                        row_dir = 1
+                        col_dir = 0
+                        c -= 1
+                        r += 1
+                    elif row_dir == 1:
+                        row_dir = 0
+                        col_dir = -1
+                        r -= 1
+                        c -= 1
+                    elif col_dir == -1:
+                        row_dir = -1
+                        col_dir = 0
+                        c += 1
+                        r -= 1
+                        coils += 1
+                    else:
+                        row_dir = 0
+                        col_dir = 1
+                        r += 1
+                        c += 1
+        
+        return matrix
